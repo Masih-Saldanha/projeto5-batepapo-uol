@@ -1,0 +1,72 @@
+/* Modelo Caixa geral + font geral */
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+/* Estilo das letras */
+p {
+    font-size: 14px;
+    line-height: 20px;
+}
+.bold {
+    font-weight: 700;
+}
+.gray {
+    color: #AAAAAA;
+}
+/* Cor do fundo */
+body {
+    background-color: #F3F3F3;
+}
+/* Estilo da aba do topo */
+header {
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 21px 11px 22px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+header ion-icon {
+    font-size: 45px;
+}
+/* Estilo da janela de bate-papo */
+main {
+    margin-top: calc(106px - 2px);
+}
+/* Fundo dos chats */
+main div {
+    padding: 10px;
+    margin: 2px 0;
+}
+main .notification {
+    background-color: #DCDCDC;
+}
+main .to-everyone {
+    background-color: #FFFFFF;
+}
+main .to-someone {
+    background-color: #FFDEDE;
+}
+/* Estilo da aba do rodape */
+footer {
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 27px 18px 27px 17px;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+footer ion-icon {
+    font-size: 26px;
+}
+footer .comment {
+    width: calc(100vw - 72px);
+}
