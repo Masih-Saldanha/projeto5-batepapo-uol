@@ -15,6 +15,9 @@ p {
 .gray {
     color: #AAAAAA;
 }
+:placeholder-shown {
+    font-style: italic;
+}
 /* Cor do fundo */
 body {
     background-color: #F3F3F3;
@@ -36,12 +39,12 @@ header ion-icon {
 }
 /* Estilo da janela de bate-papo */
 main {
-    margin-top: calc(106px - 2px);
+    margin-top: calc(106px - 0px);
 }
 /* Fundo dos chats */
 main div {
     padding: 10px;
-    margin: 2px 0;
+    margin-bottom: 4px;
 }
 main .notification {
     background-color: #DCDCDC;
