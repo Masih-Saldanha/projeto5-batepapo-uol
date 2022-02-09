@@ -15,29 +15,80 @@
 </head>
 
 <body>
+
+    <aside onclick="removeHiddenWindow(this)" class="hidden">
+        <section>
+            <h1>Escolha um contato para enviar mensagem:</h1>
+            <article>
+                <div>
+                    <ion-icon name="people"></ion-icon>
+                    <span class="user">Todos</span>
+                </div>
+                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+            </article>
+
+            <article>
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <span class="user">Todos</span>
+                </div>
+                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+            </article>
+
+            <article>
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <span class="user">Todos</span>
+                </div>
+                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+            </article>
+
+            <h1>Escolha a visibilidade:</h1>
+
+            <article>
+                <div>
+                    <ion-icon name="lock-open"></ion-icon>
+                    <span class="user">Todos</span>
+                </div>
+                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+            </article>
+
+            <article>
+                <div>
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <span class="user">Todos</span>
+                </div>
+                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+            </article>
+        </section>
+    </aside>
+    
     <header>
         <img src="assets/logo-batepapo-uol.png" alt="logo-batepapo-uol">
-        <ion-icon name="people"></ion-icon>
+        <ion-icon onclick="showHiddenWindow()" name="people"></ion-icon>
     </header>
 
     <main>
         <div class="notification">
-            <p><span class="gray">(09:21:45) </span><span class="bold"> João </span> entra na sala...</p>
+            <p><time>(09:21:45) </time><span class="user"> João </span> entra na sala...</p>
         </div>
         <div class="to-everyone">
-            <p><span class="gray">(09:22:28) </span><span class="bold"> João </span> para <span class="bold"> Todos: </span>Bom dia</p>
+            <p><time>(09:22:28) </time><span class="user"> João </span> para <span class="user"> Todos: </span>Bom dia</p>
         </div>
         <div class="to-someone">
-            <p><span class="gray">(09:22:28) </span><span class="bold"> João </span> reservadamente para <span class="bold"> Maria </span> Oi gatinha quer tc?</p>
+            <p><time>(09:22:28) </time><span class="user"> João </span> reservadamente para <span class="user"> Maria </span> Oi gatinha quer tc?</p>
         </div>
     </main>
 
     <footer>
-        <input class="comment" placeholder="Escreva aqui..." type="text" name="comment" id="comment">
+        <textarea class="comment" name="comment" placeholder="Escreva aqui..." id="comment" rows="2"></textarea>
+        <!-- <input class="comment" placeholder="Escreva aqui..." type="text" name="comment" id="comment"> -->
         <ion-icon name="paper-plane-outline"><input type="button" name="Enviar" value=""></ion-icon>
     </footer>
-    <!-- SCRIPT JS -->
+    <!-- SCRIPTS GERAIS -->
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- JAVA SCRIPT MEU -->
     <script src="script/script.js"></script>
 </body>
 

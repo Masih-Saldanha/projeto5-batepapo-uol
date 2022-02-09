@@ -9,14 +9,20 @@ p {
     font-size: 14px;
     line-height: 20px;
 }
-.bold {
+.user {
     font-weight: 700;
 }
-.gray {
+time {
     color: #AAAAAA;
 }
 :placeholder-shown {
     font-style: italic;
+    /* background-color: blue; */
+    /* color: blue; */
+    padding-top: 10px;
+    /* text-align: center; */
+    /* font-size: 40px; */
+    border: none;
 }
 /* Cor do fundo */
 body {
@@ -33,9 +39,56 @@ header {
     align-items: center;
     padding: 16px 21px 11px 22px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1;
 }
 header ion-icon {
     font-size: 45px;
+}
+/* Estilo da aba escondida */
+aside {
+    background-color: #00000099;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: calc(100vh);
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    z-index: 2;
+    font-family: 'Roboto', sans-serif;
+
+}
+section {
+    background-color: #FFFFFF;
+    width: 259px;
+    height: 100vh;
+    margin-left: calc(100vw - 259px);
+}
+aside ion-icon {
+    font-size: 25px;
+}
+aside h1 {
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    padding: 22px 44px;
+    /* border: 1px solid black; */
+}
+aside .user {
+    font-weight: 400;
+    font-size: 16px;
+}
+article {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 17px;
+}
+article > div {
+    display: flex;
+    align-items: center;
+}
+.hidden {
+    left: 100vw;
 }
 /* Estilo da janela de bate-papo */
 main {
@@ -61,6 +114,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100vw;
+    height: 94px; /* TALVE IRRELEVANTE */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,4 +126,10 @@ footer ion-icon {
 }
 footer .comment {
     width: calc(100vw - 72px);
+    /* padding: auto; */
+    /* padding-bottom: 10px; */
+    height: 40px;
+    border: none;
+    /* display: inline-flex; */
+    /* margin: auto; */
 }
