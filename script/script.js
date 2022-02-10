@@ -1,19 +1,60 @@
 // Nome do usuário definido
 // const userName = prompt("Qual o seu nome?");
 const userName = "Masih";
-const name = {name: userName}; // OBJETOS
-const names = [name];          // ARRAY DE OBJETOS
+const objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
 
-// COMUNICAÇÃO COM O SERVER:
-const promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
-promise.then(processResponse);
+// VARIÁVEIS PARA ARMAZENAR MENSAGENS DA API
+// const mensagesObjects = undefined;
+// const mainHTML = document.querySelector("main");
 
-function processResponse(response) {
-    console.log(response.data);
+// COMUNICAÇÃO COM O SERVER (ADIÇÃO DO USUÁRIO À API):
+const promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
+promisePost.then(addUser);
+promisePost.catch(addUserFailed);
+
+function addUser(code) {
+    const statusCode = code.status;
+    console.log(statusCode);
 }
 
-function addUser() {
-    console.log(processResponse);
+function addUserFailed(error) {
+    const errorCode = error.response.status;
+    console.log(errorCode);
+}
+
+// COMUNICAÇÃO COM O SERVER (CARREGANDO MENSAGENS DA API):
+const promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+promiseGet.then(getMensages);
+
+function getMensages(mensages) {
+    const mensagesData = mensages.data;
+    console.log(mensagesData);
+    // mensagesObjects.push(mensagesData);
+    // console.log(mensagesObjects);
+    const mainHTML = document.querySelector("main");
+    for (i = 0; i < mensagesData.length; i++) {
+        if (mensagesData[i].type === "status") {
+            mainHTML.innerHTML += `
+            <div class="notification">
+            <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>${mensagesData[i].text}</p>
+            </div>
+            `;
+        }
+        else if (mensagesData[i].type === "reserved") {
+            mainHTML.innerHTML += `
+            <div class="to-someone">
+            <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>reservadamente para <span class="user">${mensagesData[i].to} </span>${mensagesData[i].text}</p>
+            </div>
+            `;
+        }
+        else if (mensagesData[i].type === "normal") {
+            mainHTML.innerHTML += `
+            <div class="to-everyone">
+            <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>para <span class="user">${mensagesData[i].to} </span>${mensagesData[i].text}</p>
+            </div>
+            `;
+        }
+    }
 }
 
 // TIRA JANELA DE ESCOLHER CONTATO DA TELA
