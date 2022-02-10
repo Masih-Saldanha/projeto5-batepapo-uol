@@ -5,6 +5,7 @@ const objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
 
 // VARIÁVEIS PARA ARMAZENAR MENSAGENS DA API
 const mainHTML = document.querySelector("main");
+const autoScroll = document.querySelector(".auto-scroll");
 
 
 // COMUNICAÇÃO COM O SERVER (ADIÇÃO DO USUÁRIO À API):
@@ -35,8 +36,6 @@ function refreshMensages() {
 function getMensages(mensages) {
     const mensagesData = mensages.data;
     console.log(mensagesData);
-    // mensagesObjects.push(mensagesData);
-    // console.log(mensagesObjects);
     for (i = 0; i < mensagesData.length; i++) {
         if (mensagesData[i].type === "status") {
             mainHTML.innerHTML += `
@@ -60,6 +59,7 @@ function getMensages(mensages) {
             `;
         }
     }
+    autoScroll.scrollIntoView(false);
 }
 
 // TIRA JANELA DE ESCOLHER CONTATO DA TELA

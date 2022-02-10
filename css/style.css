@@ -93,7 +93,9 @@ article > div {
 /* Estilo da janela de bate-papo */
 main {
     margin-top: calc(106px - 0px);
-    margin-bottom: calc(106px - 0px);
+}
+.auto-scroll {
+    margin-top: calc(106px - 0px);
 }
 /* Fundo dos chats */
 main div {
@@ -111,11 +113,12 @@ main .to-someone {
 }
 /* Estilo da aba do rodape */
 footer {
+    /* margin-top: 106px; */
     background-color: #ffffff;
     position: fixed;
     bottom: 0;
     width: 100vw;
-    height: 94px; /* TALVE IRRELEVANTE */
+    height: 94px; /* TALVEZ IRRELEVANTE */
     display: flex;
     justify-content: space-between;
     align-items: center;
