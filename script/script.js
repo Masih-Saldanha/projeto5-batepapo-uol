@@ -4,8 +4,8 @@ const userName = "Masih";
 const objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
 
 // VARIÁVEIS PARA ARMAZENAR MENSAGENS DA API
-// const mensagesObjects = undefined;
-// const mainHTML = document.querySelector("main");
+const mainHTML = document.querySelector("main");
+
 
 // COMUNICAÇÃO COM O SERVER (ADIÇÃO DO USUÁRIO À API):
 const promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
@@ -24,14 +24,19 @@ function addUserFailed(error) {
 
 // COMUNICAÇÃO COM O SERVER (CARREGANDO MENSAGENS DA API):
 const promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
-promiseGet.then(getMensages);
-
+promiseGet.then(getMensages); // PRINTA MENSAGENS NA HORA
+setInterval(refreshMensages, 3000) // RECARREGA MENSAGENS
+// FUNÇÃO DE RECARREGAR MENSAGENS NA TELA
+function refreshMensages() {
+    mainHTML.innerHTML = "";
+    promiseGet.then(getMensages);
+}
+// FUNÇÃO PARA PRINTAR MENSAGENS NA TELA
 function getMensages(mensages) {
     const mensagesData = mensages.data;
     console.log(mensagesData);
     // mensagesObjects.push(mensagesData);
     // console.log(mensagesObjects);
-    const mainHTML = document.querySelector("main");
     for (i = 0; i < mensagesData.length; i++) {
         if (mensagesData[i].type === "status") {
             mainHTML.innerHTML += `
