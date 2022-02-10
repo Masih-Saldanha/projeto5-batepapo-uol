@@ -44,7 +44,7 @@ function getMensages(mensages) {
             </div>
             `;
         }
-        else if (mensagesData[i].type === "reserved") {
+        else if (mensagesData[i].type === "reserved" && mensagesData[i].to === userName) {
             mainHTML.innerHTML += `
             <div class="to-someone">
             <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>reservadamente para <span class="user">${mensagesData[i].to} </span>${mensagesData[i].text}</p>
