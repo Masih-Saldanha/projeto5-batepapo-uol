@@ -1,37 +1,46 @@
-// Nome do usuário definido
+// VARIÁVEIS INNERHTML
+const mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
+const autoScroll = document.querySelector(".auto-scroll"); // VARIÁVEL PARA AUTO-SCROLLAR A TELA
+
+// Nome do usuário definido e enviado à API no início
 // const userName = prompt("Qual o seu nome?");
-const userName = "Masih";
-const objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
+let userName = "Masih";
+let objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
+let promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
+uploadUser();
 
-// VARIÁVEIS PARA ARMAZENAR MENSAGENS DA API
-const mainHTML = document.querySelector("main");
-const autoScroll = document.querySelector(".auto-scroll");
-
+// FUNÇÃO QUE PEGA NOME FORNECIDO E ENVIA À API
+function uploadUser() {
+    objectName = {name: userName};
+    promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
+    promisePost.then(addUser);
+    promisePost.catch(addUserFailed);
+}
 
 // COMUNICAÇÃO COM O SERVER (ADIÇÃO DO USUÁRIO À API):
-const promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
-promisePost.then(addUser);
-promisePost.catch(addUserFailed);
-
-function addUser(code) {
+function addUser(code) { // SUCESSO
     const statusCode = code.status;
     console.log(statusCode);
 }
 
-function addUserFailed(error) {
+function addUserFailed(error) { // FALHA
     const errorCode = error.response.status;
     console.log(errorCode);
+    userName = prompt("Nome já em uso, escolha outro: ");
+    uploadUser();
 }
 
 // COMUNICAÇÃO COM O SERVER (CARREGANDO MENSAGENS DA API):
 const promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 promiseGet.then(getMensages); // PRINTA MENSAGENS NA HORA
 setInterval(refreshMensages, 3000) // RECARREGA MENSAGENS
+
 // FUNÇÃO DE RECARREGAR MENSAGENS NA TELA
 function refreshMensages() {
     mainHTML.innerHTML = "";
     promiseGet.then(getMensages);
 }
+
 // FUNÇÃO PARA PRINTAR MENSAGENS NA TELA
 function getMensages(mensages) {
     const mensagesData = mensages.data;
@@ -66,6 +75,7 @@ function getMensages(mensages) {
 function removeHiddenWindow(window) {
     window.classList.add("hidden");
 }
+
 // COLOCA JANELA DE ESCOLHER CONTATO DA TELA
 function showHiddenWindow() {
     const window = document.querySelector("aside");
