@@ -1,5 +1,6 @@
 // VARIÁVEIS INNERHTML
-const mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
+let mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
+let mainHTMLcomparator = document.querySelector("main").innerHTML;
 const autoScroll = document.querySelector(".auto-scroll"); // VARIÁVEL PARA AUTO-SCROLLAR A TELA
 
 // Nome do usuário definido e enviado à API no início
@@ -20,31 +21,36 @@ function uploadUser() {
 // COMUNICAÇÃO COM O SERVER (ADIÇÃO DO USUÁRIO À API):
 function addUser(code) { // SUCESSO
     const statusCode = code.status;
-    console.log(statusCode);
+    // console.log(statusCode);
+    // uploadUser();
 }
 
 function addUserFailed(error) { // FALHA
     const errorCode = error.response.status;
-    console.log(errorCode);
+    // console.log(errorCode);
     userName = prompt("Nome já em uso, escolha outro: ");
     uploadUser();
 }
 
 // COMUNICAÇÃO COM O SERVER (CARREGANDO MENSAGENS DA API):
-const promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+let promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 promiseGet.then(getMensages); // PRINTA MENSAGENS NA HORA
 setInterval(refreshMensages, 3000) // RECARREGA MENSAGENS
 
 // FUNÇÃO DE RECARREGAR MENSAGENS NA TELA
 function refreshMensages() {
-    mainHTML.innerHTML = "";
-    promiseGet.then(getMensages);
+    // if (mainHTML !== mainHTMLcomparator) {
+        mainHTML.innerHTML = "";
+        promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+        promiseGet.then(getMensages);
+        // mainHTMLcomparator = mainHTML;
+    // }
 }
 
 // FUNÇÃO PARA PRINTAR MENSAGENS NA TELA
 function getMensages(mensages) {
     const mensagesData = mensages.data;
-    console.log(mensagesData);
+    // console.log(mensagesData);
     for (i = 0; i < mensagesData.length; i++) {
         if (mensagesData[i].type === "status") {
             mainHTML.innerHTML += `
@@ -68,7 +74,34 @@ function getMensages(mensages) {
             `;
         }
     }
+    // console.log(mainHTML.innerHTML);
+    // console.log(mainHTMLcomparator);
     autoScroll.scrollIntoView(false);
+}
+
+// MANTER CONEXÃO DO USUÁRIO COM API
+let promisePostStatus = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", objectName);
+setInterval(userStatusUpload, 5000);
+
+function userStatusUpload() {
+    // objectName = {name: userName};
+    promisePostStatus = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", objectName);
+    promisePost.then(userStatusOn);
+    promisePost.catch(userStatusOff);
+}
+
+function userStatusOn(code) { // SUCESSO
+    const statusCode = code.status;
+    console.log(statusCode);
+    // console.log("Usuário tá on!");
+}
+
+function userStatusOff(error) { // FALHA
+    const errorCode = error.response.status;
+    console.log(errorCode);
+    console.log("Usuário tá off!");
+    // userName = prompt("Nome já em uso, escolha outro: ");
+    // userStatusOn();
 }
 
 // TIRA JANELA DE ESCOLHER CONTATO DA TELA
