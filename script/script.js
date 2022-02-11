@@ -1,7 +1,9 @@
 // VARIÁVEIS INNERHTML
 let mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
-let mainHTMLcomparator = document.querySelector("main").innerHTML;
+// let mainHTMLcomparator = document.querySelector("main").innerHTML;
 const autoScroll = document.querySelector(".auto-scroll"); // VARIÁVEL PARA AUTO-SCROLLAR A TELA
+let sendMensageTo = "Todos";
+let typeOfMensage = "message";
 
 // Nome do usuário definido e enviado à API no início
 // const userName = prompt("Qual o seu nome?");
@@ -99,9 +101,36 @@ function userStatusOn(code) { // SUCESSO
 function userStatusOff(error) { // FALHA
     const errorCode = error.response.status;
     console.log(errorCode);
-    console.log("Usuário tá off!");
+    // console.log("Usuário tá off!");
     // userName = prompt("Nome já em uso, escolha outro: ");
     // userStatusOn();
+}
+// ENVIO DE MENSAGENS PARA A API
+function sendMensage() {
+    let mensage = document.querySelector(".comment").value;
+    let mensageObject = {
+        from: userName,
+        to: sendMensageTo,
+        text: mensage,
+        type: typeOfMensage // ou "private_message" para o bônus
+    }
+    let promisePostMensage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensageObject);
+
+    promisePostMensage.then(mensageSended);
+    promisePostMensage.catch(mensageNotSended);
+    document.querySelector(".comment").value = "";
+}
+
+function mensageSended(code) { // SUCESSO
+    const statusCode = code.status;
+    console.log(statusCode);
+    console.log("Mensagem enviada");
+}
+
+function mensageNotSended(error) { // FALHA
+    const errorCode = error.response.status;
+    console.log(errorCode);
+    console.log("Mensagem não enviada");
 }
 
 // TIRA JANELA DE ESCOLHER CONTATO DA TELA
