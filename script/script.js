@@ -54,21 +54,21 @@ function getMensages(mensages) {
     for (i = 0; i < mensagesData.length; i++) {
         if (mensagesData[i].type === "status") {
             mainHTML.innerHTML += `
-            <div class="notification">
+            <div class="notification" data-identifier="message">
             <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>${mensagesData[i].text}</p>
             </div>
             `;
         }
-        else if (mensagesData[i].type === "reserved" && mensagesData[i].to === userName) {
+        else if (mensagesData[i].type === "private_message" && mensagesData[i].to === userName) {
             mainHTML.innerHTML += `
-            <div class="to-someone">
+            <div class="to-someone" data-identifier="message">
             <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>reservadamente para <span class="user">${mensagesData[i].to} </span>${mensagesData[i].text}</p>
             </div>
             `;
         }
-        else if (mensagesData[i].type === "normal") {
+        else if (mensagesData[i].type === "message") {
             mainHTML.innerHTML += `
-            <div class="to-everyone">
+            <div class="to-everyone" data-identifier="message">
             <p><time>${mensagesData[i].time} </time><span class="user">${mensagesData[i].from} </span>para <span class="user">${mensagesData[i].to} </span>${mensagesData[i].text}</p>
             </div>
             `;
