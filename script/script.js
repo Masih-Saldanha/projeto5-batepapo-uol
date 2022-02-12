@@ -218,3 +218,9 @@ function selectPrivacy(type) {
 }
 
 // MANDAR MENSAGEM COM ENTER
+let commentEnter = document.querySelector(".comment");
+commentEnter.addEventListener("keyup", function(event) { // entendi o princípio e o que ocorre, mas falta entender function(event) melhor
+  if (event.keyCode === 13) {
+    document.querySelector("footer ion-icon").click()
+  }
+})
