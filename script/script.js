@@ -1,13 +1,11 @@
 // VARIÁVEIS INNERHTML
 let mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
-// let mainHTMLcomparator = document.querySelector("main").innerHTML;
 const autoScroll = document.querySelector(".auto-scroll"); // VARIÁVEL PARA AUTO-SCROLLAR A TELA
 let sendMensageTo = "Todos";
 let typeOfMensage = "message";
 
 // Nome do usuário definido e enviado à API no início
-// const userName = prompt("Qual o seu nome?");
-let userName = "Masih";
+let userName = prompt("Qual o seu nome?");
 let objectName = {name: userName}; // OBJETO COM NOME FORNECIDO PELO USUÁRIO
 let promisePost = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
 uploadUser();
@@ -24,7 +22,6 @@ function uploadUser() {
 function addUser(code) { // SUCESSO
     const statusCode = code.status;
     // console.log(statusCode);
-    // uploadUser();
 }
 
 function addUserFailed(error) { // FALHA
@@ -37,16 +34,13 @@ function addUserFailed(error) { // FALHA
 // COMUNICAÇÃO COM O SERVER (CARREGANDO MENSAGENS DA API):
 let promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 promiseGet.then(getMensages); // PRINTA MENSAGENS NA HORA
-setInterval(refreshMensages, 3000) // RECARREGA MENSAGENS
+setInterval(refreshMensages, 3000); // RECARREGA MENSAGENS
 
 // FUNÇÃO DE RECARREGAR MENSAGENS NA TELA
 function refreshMensages() {
-    // if (mainHTML !== mainHTMLcomparator) {
         mainHTML.innerHTML = "";
         promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
         promiseGet.then(getMensages);
-        // mainHTMLcomparator = mainHTML;
-    // }
 }
 
 // FUNÇÃO PARA PRINTAR MENSAGENS NA TELA
@@ -76,8 +70,6 @@ function getMensages(mensages) {
             `;
         }
     }
-    // console.log(mainHTML.innerHTML);
-    // console.log(mainHTMLcomparator);
     autoScroll.scrollIntoView(false);
 }
 
@@ -86,7 +78,6 @@ let promisePostStatus = axios.post("https://mock-api.driven.com.br/api/v4/uol/st
 setInterval(userStatusUpload, 5000);
 
 function userStatusUpload() {
-    // objectName = {name: userName};
     promisePostStatus = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", objectName);
     promisePost.then(userStatusOn);
     promisePost.catch(userStatusOff);
@@ -102,8 +93,6 @@ function userStatusOff(error) { // FALHA
     const errorCode = error.response.status;
     console.log(errorCode);
     // console.log("Usuário tá off!");
-    // userName = prompt("Nome já em uso, escolha outro: ");
-    // userStatusOn();
 }
 // ENVIO DE MENSAGENS PARA A API
 function sendMensage() {
@@ -134,7 +123,8 @@ function mensageNotSended(error) { // FALHA
 }
 
 // TIRA JANELA DE ESCOLHER CONTATO DA TELA
-function removeHiddenWindow(window) {
+function removeHiddenWindow() {
+    const window = document.querySelector("aside");
     window.classList.add("hidden");
 }
 
@@ -142,4 +132,49 @@ function removeHiddenWindow(window) {
 function showHiddenWindow() {
     const window = document.querySelector("aside");
     window.classList.remove("hidden");
+}
+
+// EXTRAS
+
+// RENDERIZAR LISTA DE PARTICPANTES DO CHAT
+let promiseGetParticipant = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+promiseGetParticipant.then(getParticipants); // RENDERIZA NA HORA
+setInterval(refreshParticipants, 10000); // ATUALIZA A CADA 10 SEGUNDOS A LISTA
+
+function getParticipants(participant) {
+    const participantsList = participant.data;
+    // console.log(participantsList);
+    const div = document.querySelector(".participants-list");
+    for (i = 0; i < participantsList.length; i++) {
+        div.innerHTML += `
+        <article onclick="selectUser(this)" data-identifier="participant">
+            <div>
+                <ion-icon name="person-circle"></ion-icon>
+                <span class="user">${participantsList[i].name}</span>
+            </div>
+            <ion-icon class="check-user not-selected" data-identifier="visibility" name="checkmark"></ion-icon>
+        </article>
+        `;
+    }
+}
+
+function refreshParticipants() {
+    const div = document.querySelector(".participants-list");
+    div.innerHTML = "";
+    promiseGetParticipant = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+    promiseGetParticipant.then(getParticipants);
+}
+
+function selectUser(user) {
+    let userInnertext = user.children[0].children[1].innerText;
+    console.log(userInnertext);
+    sendMensageTo = userInnertext;
+
+    let unCheckAll = document.querySelectorAll(".check-user");
+    for (i = 0; i < unCheckAll.length; i++) {
+        unCheckAll[i].classList.add("not-selected");
+    }
+
+    let check = user.children[1];
+    check.classList.remove("not-selected");
 }

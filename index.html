@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/favicon-batepapo-uol.ico" type="image/x-icon">
@@ -16,33 +17,28 @@
 
 <body>
 
-    <aside onclick="removeHiddenWindow(this)" class="hidden">
+    <aside class="hidden">
+        <div onclick="removeHiddenWindow()" class="side"></div>
         <section>
             <h1>Escolha um contato para enviar mensagem:</h1>
-            <article>
+            <article onclick="selectUser(this)" data-identifier="participant">
                 <div>
                     <ion-icon name="people"></ion-icon>
                     <span class="user">Todos</span>
                 </div>
-                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+                <ion-icon class="check-user" data-identifier="visibility" name="checkmark"></ion-icon>
             </article>
-
-            <article>
-                <div>
-                    <ion-icon name="person-circle"></ion-icon>
-                    <span class="user">Todos</span>
-                </div>
-                <ion-icon class="not-selected" name="checkmark"></ion-icon>
-            </article>
-
-            <article>
-                <div>
-                    <ion-icon name="person-circle"></ion-icon>
-                    <span class="user">Todos</span>
-                </div>
-                <ion-icon class="not-selected" name="checkmark"></ion-icon>
-            </article>
-
+            <div class="participants-list">
+                <!-- 
+                    <article>
+                        <div>
+                            <ion-icon name="person-circle"></ion-icon>
+                            <span class="user">Todos</span>
+                        </div>
+                        <ion-icon class="not-selected" name="checkmark"></ion-icon>
+                    </article>
+                -->
+            </div>
             <h1>Escolha a visibilidade:</h1>
 
             <article>
@@ -62,7 +58,7 @@
             </article>
         </section>
     </aside>
-    
+
     <header>
         <img src="assets/logo-batepapo-uol.png" alt="logo-batepapo-uol">
         <ion-icon onclick="showHiddenWindow()" name="people"></ion-icon>
