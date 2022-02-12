@@ -29,32 +29,24 @@
                 <ion-icon class="check-user" data-identifier="visibility" name="checkmark"></ion-icon>
             </article>
             <div class="participants-list">
-                <!-- 
-                    <article>
-                        <div>
-                            <ion-icon name="person-circle"></ion-icon>
-                            <span class="user">Todos</span>
-                        </div>
-                        <ion-icon class="not-selected" name="checkmark"></ion-icon>
-                    </article>
-                -->
+                <!-- ÁREA QUE RECEBE CONTATOS -->
             </div>
             <h1>Escolha a visibilidade:</h1>
 
-            <article>
+            <article onclick="selectPrivacy(this)">
                 <div>
                     <ion-icon name="lock-open"></ion-icon>
-                    <span class="user">Todos</span>
+                    <span class="user">Público</span>
                 </div>
-                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+                <ion-icon class="check-privacy" name="checkmark"></ion-icon>
             </article>
 
-            <article>
+            <article onclick="selectPrivacy(this)">
                 <div>
                     <ion-icon name="lock-closed"></ion-icon>
-                    <span class="user">Todos</span>
+                    <span class="user">Reservadamente</span>
                 </div>
-                <ion-icon class="not-selected" name="checkmark"></ion-icon>
+                <ion-icon class="check-privacy not-selected" name="checkmark"></ion-icon>
             </article>
         </section>
     </aside>
@@ -65,24 +57,17 @@
     </header>
 
     <main>
-        <!-- 
-        <div class="notification">
-            <p><time>(09:21:45) </time><span class="user">João </span>entra na sala...</p>
-        </div>
-        <div class="to-everyone">
-            <p><time>(09:22:28) </time><span class="user">João </span>para <span class="user">Todos: </span>Bom dia</p>
-        </div>
-        <div class="to-someone">
-            <p><time>(09:22:28) </time><span class="user">João </span>reservadamente para <span class="user">Maria </span>Oi gatinha quer tc?</p>
-        </div>
-         -->
+        <!-- ÁREA QUE RECEBE AS MENSAGENS -->
     </main>
     <!-- AUTO SCROLLER -->
     <div class="auto-scroll"></div>
 
     <!-- CAIXA DE COMENTAR -->
     <footer>
-        <textarea class="comment" name="comment" placeholder="Escreva aqui..." id="comment" rows="2"></textarea>
+        <div class="text-area">
+            <textarea class="comment" name="comment" placeholder="Escreva aqui..." id="comment" rows="2"></textarea>
+            <p>Enviando para <span class="user-selected">Todos </span><span class="privacy-selected">(Público)</span></p>
+        </div>
         <ion-icon name="paper-plane-outline" onclick="sendMensage()" data-identifier="send-message"></ion-icon>
     </footer>
 

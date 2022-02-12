@@ -1,6 +1,8 @@
 // VARIÁVEIS INNERHTML
 let mainHTML = document.querySelector("main"); // VARIÁVEL PARA PREENCHER TELA COM MENSAGENS
 const autoScroll = document.querySelector(".auto-scroll"); // VARIÁVEL PARA AUTO-SCROLLAR A TELA
+let userSelectedHTML = document.querySelector(".user-selected");
+let privacySelectedHTML = document.querySelector(".privacy-selected");
 let sendMensageTo = "Todos";
 let typeOfMensage = "message";
 
@@ -38,7 +40,7 @@ setInterval(refreshMensages, 3000); // RECARREGA MENSAGENS
 
 // FUNÇÃO DE RECARREGAR MENSAGENS NA TELA
 function refreshMensages() {
-        mainHTML.innerHTML = "";
+        // mainHTML.innerHTML = "";
         promiseGet = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
         promiseGet.then(getMensages);
 }
@@ -47,6 +49,7 @@ function refreshMensages() {
 function getMensages(mensages) {
     const mensagesData = mensages.data;
     // console.log(mensagesData);
+    mainHTML.innerHTML = "";
     for (i = 0; i < mensagesData.length; i++) {
         if (mensagesData[i].type === "status") {
             mainHTML.innerHTML += `
@@ -101,7 +104,7 @@ function sendMensage() {
         from: userName,
         to: sendMensageTo,
         text: mensage,
-        type: typeOfMensage // ou "private_message" para o bônus
+        type: typeOfMensage // "message" ou "private_message" para o bônus
     }
     let promisePostMensage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", mensageObject);
 
@@ -145,30 +148,45 @@ function getParticipants(participant) {
     const participantsList = participant.data;
     // console.log(participantsList);
     const div = document.querySelector(".participants-list");
+    div.innerHTML = "";
     for (i = 0; i < participantsList.length; i++) {
-        div.innerHTML += `
-        <article onclick="selectUser(this)" data-identifier="participant">
+        if (participantsList[i].name === sendMensageTo) {
+            div.innerHTML += `
+            <article onclick="selectUser(this)" data-identifier="participant">
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <span class="user">${participantsList[i].name}</span>
+                </div>
+                <ion-icon class="check-user" data-identifier="visibility" name="checkmark"></ion-icon>
+            </article>
+            `;
+        } else {
+            div.innerHTML += `
+            <article onclick="selectUser(this)" data-identifier="participant">
             <div>
-                <ion-icon name="person-circle"></ion-icon>
-                <span class="user">${participantsList[i].name}</span>
+            <ion-icon name="person-circle"></ion-icon>
+            <span class="user">${participantsList[i].name}</span>
             </div>
             <ion-icon class="check-user not-selected" data-identifier="visibility" name="checkmark"></ion-icon>
-        </article>
-        `;
+            </article>
+            `;
+        }
     }
 }
 
 function refreshParticipants() {
     const div = document.querySelector(".participants-list");
-    div.innerHTML = "";
+    // div.innerHTML = "";
     promiseGetParticipant = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
     promiseGetParticipant.then(getParticipants);
 }
 
+// SELECIONADOR DE USUARIO PARA ENVIAR MENSAGEM
 function selectUser(user) {
     let userInnertext = user.children[0].children[1].innerText;
     console.log(userInnertext);
     sendMensageTo = userInnertext;
+    userSelectedHTML.innerHTML = `${sendMensageTo} `
 
     let unCheckAll = document.querySelectorAll(".check-user");
     for (i = 0; i < unCheckAll.length; i++) {
@@ -178,3 +196,25 @@ function selectUser(user) {
     let check = user.children[1];
     check.classList.remove("not-selected");
 }
+
+// SELECIONADOR DE PRIVACIDADE
+function selectPrivacy(type) {
+    let privacyInnertext = type.children[0].children[1].innerText;
+    // console.log(privacyInnertext);
+    if (privacyInnertext === "Público") {
+        typeOfMensage = "message";
+    } else {
+        typeOfMensage = "private_message";
+    }
+    privacySelectedHTML.innerHTML = `(${privacyInnertext})`;
+
+    let unCheckAll = document.querySelectorAll(".check-privacy");
+    for (i = 0; i < unCheckAll.length; i++) {
+        unCheckAll[i].classList.add("not-selected");
+    }
+
+    let check = type.children[1];
+    check.classList.remove("not-selected");
+}
+
+// MANDAR MENSAGEM COM ENTER

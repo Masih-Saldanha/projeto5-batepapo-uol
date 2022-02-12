@@ -69,6 +69,14 @@ section {
 }
 aside ion-icon {
     font-size: 25px;
+    /* color: #28BB25; */
+    /* border: 1px solid black; */
+}
+.check-user {
+    color: #28BB25;
+}
+.check-privacy {
+    color: #28BB25;
 }
 aside h1 {
     font-weight: 700;
@@ -120,15 +128,27 @@ main .to-someone {
 /* Estilo da aba do rodape */
 footer {
     background-color: #ffffff;
+    /* background-color: blue; */
     position: fixed;
     bottom: 0;
     width: 100vw;
     height: 94px; /* TALVEZ IRRELEVANTE */
+    padding: 27px 18px 27px 17px;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 27px 18px 27px 17px;
-    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+/* footer > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+.text-area > p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #505050;
 }
 footer ion-icon {
     font-size: 26px;
