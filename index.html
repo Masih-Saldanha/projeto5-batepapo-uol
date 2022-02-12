@@ -16,6 +16,12 @@
 </head>
 
 <body>
+    <div class="welcome">
+        <img src="assets/logo-batepapo-uol.png" alt="logo-batepapo-uol">
+        <p class="not-selected">ENTRANDO...</p>
+        <input class="input-name" type="text" placeholder="Digite seu nome" data-identifier="enter-name" name="" id="">
+        <button onclick="uploadUser()" data-identifier="start">Entrar</button>
+    </div>
 
     <aside class="hidden">
         <div onclick="removeHiddenWindow()" class="side"></div>
@@ -26,14 +32,14 @@
                     <ion-icon name="people"></ion-icon>
                     <span class="user">Todos</span>
                 </div>
-                <ion-icon class="check-user" data-identifier="visibility" name="checkmark"></ion-icon>
+                <ion-icon class="check-user" name="checkmark"></ion-icon>
             </article>
             <div class="participants-list">
                 <!-- ÁREA QUE RECEBE CONTATOS -->
             </div>
             <h1>Escolha a visibilidade:</h1>
 
-            <article onclick="selectPrivacy(this)">
+            <article onclick="selectPrivacy(this)" data-identifier="visibility">
                 <div>
                     <ion-icon name="lock-open"></ion-icon>
                     <span class="user">Público</span>
@@ -41,7 +47,7 @@
                 <ion-icon class="check-privacy" name="checkmark"></ion-icon>
             </article>
 
-            <article onclick="selectPrivacy(this)">
+            <article onclick="selectPrivacy(this)" data-identifier="visibility">
                 <div>
                     <ion-icon name="lock-closed"></ion-icon>
                     <span class="user">Reservadamente</span>
@@ -66,7 +72,8 @@
     <footer>
         <div class="text-area">
             <textarea class="comment" name="comment" placeholder="Escreva aqui..." id="comment" rows="2"></textarea>
-            <p>Enviando para <span class="user-selected">Todos </span><span class="privacy-selected">(Público)</span></p>
+            <p>Enviando para <span class="user-selected">Todos </span><span class="privacy-selected">(Público)</span>
+            </p>
         </div>
         <ion-icon name="paper-plane-outline" onclick="sendMensage()" data-identifier="send-message"></ion-icon>
     </footer>

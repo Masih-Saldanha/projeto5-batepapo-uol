@@ -15,13 +15,9 @@ p {
 time {
     color: #AAAAAA;
 }
-:placeholder-shown {
+.comment:placeholder-shown {
     font-style: italic;
-    /* background-color: blue; */
-    /* color: blue; */
     padding-top: 10px;
-    /* text-align: center; */
-    /* font-size: 40px; */
     border: none;
 }
 /* Cor do fundo */
@@ -69,8 +65,6 @@ section {
 }
 aside ion-icon {
     font-size: 25px;
-    /* color: #28BB25; */
-    /* border: 1px solid black; */
 }
 .check-user {
     color: #28BB25;
@@ -128,7 +122,6 @@ main .to-someone {
 /* Estilo da aba do rodape */
 footer {
     background-color: #ffffff;
-    /* background-color: blue; */
     position: fixed;
     bottom: 0;
     width: 100vw;
@@ -139,11 +132,6 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
-/* footer > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} */
 .text-area > p {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -155,11 +143,57 @@ footer ion-icon {
 }
 footer .comment {
     width: calc(100vw - 72px);
-    /* padding: auto; */
-    /* padding-bottom: 10px; */
     height: 40px;
     border: none;
-    /* display: inline-flex; */
-    /* margin: auto; */
-    /* z-index: -1; */
+}
+
+/* BONUS DA TELA DE ENTRADA */
+
+.welcome {
+    top: 0;
+    background-color: #ffffff;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.welcome img {
+    margin-top: 72px;
+    margin-bottom: 94px;
+    width: 130px;
+    height: 92px;
+}
+.input-name {
+    width: 261px;
+    height: 54px;
+    border-radius: 4px;
+    border: 1px solid #D7D7D7;
+    background-color: #FFFFFF;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+}
+.input-name:placeholder-shown {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #AEAEAE;
+    text-align: center;
+}
+.welcome button {
+    margin-top: 15px;
+    width: 109px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #E7E7E7;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #696969;
 }
